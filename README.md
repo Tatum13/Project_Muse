@@ -1,11 +1,11 @@
-## [titel van jullie game]
-Project team:[jullie namen]
+## [How to dissapear]
+Project team:[Kyle Pecheer, Jur Hendriks, Nando Dobal, Abigail Van Geel, Stefan Hol, Tatum]
 
 Platform:
-[jullie platfom]
+[PC]
 
 ### Korte omschrijving van de game
-...
+In onze game is het de bedoeling om van het scherm te verdwijnen. Dat is het doel omdat je niet thuishoort in de wereld. En de manier hoe je het doet is door rond te lopen en de wereld te draaien opzoek naar het gat.
 
 ---
 #### Producten Werkproces 1
