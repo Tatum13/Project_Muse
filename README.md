@@ -1,5 +1,5 @@
 ## [How to dissapear]
-Project team:[Kyle Pecheer, Jur Hendriks, Nando Dobal, Abigail Van Geel, Stefan Hol, Tatum]
+Project team:[Kyle Pecheer, Jur Hendriks, Nando Dobal, Abigail Van Geel, Stefan Hol, Tatum De Vries]
 
 Platform:
 [PC]
