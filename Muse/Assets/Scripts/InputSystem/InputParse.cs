@@ -8,6 +8,7 @@ public class InputParse : MonoBehaviour
     private FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
     private LevelRotate _levelRotate;
+    private PauseMenu _pauseMenu;
     public bool _isRotating;
     public bool _canGrab;
 
@@ -15,6 +16,7 @@ public class InputParse : MonoBehaviour
     {
         _movementPlayer = GetComponent<MovementPlayer>();
         _levelRotate = FindObjectOfType<LevelRotate>();
+        _pauseMenu = FindObjectOfType<PauseMenu>();
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
         _levelRotate._inputControls = _inputControls;
@@ -22,6 +24,7 @@ public class InputParse : MonoBehaviour
         _inputControls.StartRotating.performed += _ => _isRotating = true;
         _inputControls.StartRotating.canceled += _ => _isRotating = false; // Wanneer je het niet ingedrukt houd dan mag niet rotaten.
         _inputControls.StartRotating.performed += _levelRotate.SavePosition;
+        _inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
     private void Update()
@@ -31,6 +34,5 @@ public class InputParse : MonoBehaviour
         {
             _levelRotate.Rotate(_inputControls.MousePosition.ReadValue<Vector2>(), _inputControls.MouseDelta.ReadValue<Vector2>());
         }
-        
     }
 }
