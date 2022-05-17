@@ -20,6 +20,7 @@ public class MovementPlayer : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)//Vraagt naar welke button die heeft.
     {
+        if (rb == null) return;
         if (Mathf.Abs(rb.velocity.y) < 0.001f)// groundcheck
         {
             rb.AddForce(new Vector3(0, jumpForce), ForceMode.Impulse);
