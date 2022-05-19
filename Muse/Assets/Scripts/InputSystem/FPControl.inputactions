@@ -44,6 +44,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "Hold(duration=0.4,pressPoint=0.5)"
+                },
+                {
+                    "name": "Gravity",
+                    "type": "Button",
+                    "id": "4c3e03c5-d039-406f-b892-b465e0f89152",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -143,6 +151,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80cbbc06-31d3-4564-9968-d927f0cba90e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gravity",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

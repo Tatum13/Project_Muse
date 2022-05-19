@@ -8,6 +8,7 @@ public class InputParse : MonoBehaviour
     private FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
     private LevelRotate _levelRotate;
+    private DeWKnop _deWknop;
     public bool _isRotating;
     public bool _canGrab;
 
@@ -15,10 +16,12 @@ public class InputParse : MonoBehaviour
     {
         _movementPlayer = GetComponent<MovementPlayer>();
         _levelRotate = FindObjectOfType<LevelRotate>();
+        _deWknop = FindObjectOfType<DeWKnop>();
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
         _levelRotate._inputControls = _inputControls;
         _inputControls.Jump.performed += _movementPlayer.Jump; // Elke keer als die preformed word dan roept hij de jump aan.
+        _inputControls.Gravity.performed += _deWknop.PressE;
         _inputControls.StartRotating.performed += _ => _isRotating = true;
         _inputControls.StartRotating.canceled += _ => _isRotating = false; // Wanneer je het niet ingedrukt houd dan mag niet rotaten.
         _inputControls.StartRotating.performed += _levelRotate.SavePosition;

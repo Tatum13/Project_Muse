@@ -6,13 +6,15 @@ public class Gravity : MonoBehaviour
 {
 	private DeWKnop boel;
 	public Vector3 speed;
-	public float gravity = 9.8f;
+	public float gravity;
+	[SerializeField] private Rigidbody rb;
 
 	// Start() is called before the first frame
 	void Start()
 	{
+		rb = GetComponent<Rigidbody>();
 		speed = new Vector3(0f, 0f, 0f);
-		boel = GameObject.Find("Directional Light").GetComponent<DeWKnop>();
+		boel = GameObject.Find("Level").GetComponent<DeWKnop>();
 
 	}
     private void Update()
@@ -22,10 +24,9 @@ public class Gravity : MonoBehaviour
     void FixedUpdate()
 	{
 
-		if(boel.grav == true) {
-			Debug.Log("de neuk");
-			speed.Set(speed.x, speed.y - gravity * Time.fixedDeltaTime, speed.z);
-			transform.position += speed;
+		if(boel.grav == true)
+        {
+			rb.useGravity = true;
 		}
 
 	}
