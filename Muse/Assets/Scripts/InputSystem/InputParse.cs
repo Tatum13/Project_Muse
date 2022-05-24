@@ -13,7 +13,7 @@ public class InputParse : MonoBehaviour
         _movementPlayer = GetComponent<MovementPlayer>();
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
-        _inputControls.Jump.performed += _movementPlayer.Jump; // Elke keer als die preformed word dan roept hij de jump aan.
+        //_inputControls.Jump.performed += _movementPlayer.Jump; // Elke keer als die preformed word dan roept hij de jump aan.
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
     private void Update()
