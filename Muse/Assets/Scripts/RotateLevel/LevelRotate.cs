@@ -12,10 +12,64 @@ public class LevelRotate : MonoBehaviour
     [SerializeField] private Vector3 _oldPosition;
     [SerializeField] private Vector3 _currentPosition;
 
+    [SerializeField] private float _rotateLvlSpeed;
+    [SerializeField] private bool _isTurning;
+    [SerializeField] private bool _isFullyTurning;
+    [SerializeField] private float rotate;
+    [SerializeField] private float x;
+    [SerializeField] private float y;
+
+    private Timer timer;
+    private float _rotated = 0;
+    private float turned;
+
     private void Start()
     {
         world =  FindObjectOfType<GameObject>();
+        timer = new Timer(2);
+        _isTurning = true;
     }
+    private void Update()
+    {
+        
+        if (_isTurning == true)
+        {
+            if (!timer.Update(Time.deltaTime))
+            {
+                rotate = (timer.Percentage * -45) - _rotated;
+                _rotated += rotate;
+                world.transform.Rotate(rotate,0 , 0);
+            }
+            else
+            {
+                timer.Reset();
+                world.transform.Rotate(-45 - _rotated, 0, 0);
+                _rotated = 0;   
+                //GravitySensor aan
+            }
+            //
+            //StartCoroutine(TurnTime());
+            //_rotateLvlSpeed = 45;
+        }
+    }
+    /*
+    IEnumerator TurnTime()
+    {
+        rotate = _rotateLvlSpeed * Time.deltaTime;
+        yield return new WaitForSeconds(2);
+        _isTurning = false;
+        _rotateLvlSpeed = 0;
+        //rotate = Mathf.Floor(rotate);
+        world.transform.Rotate(0, y, 0);
+        Debug.Log(_rotateLvlSpeed);
+    }
+    public void RotateLvl(Vector3 turnDir)
+    {
+        var rotateDir = new Vector3(turnDir.x, turnDir.y, turnDir.z);
+        transform.position += rotateDir * _rotateLvlSpeed * Time.deltaTime;
+    }
+    */
+    /*
     public void Rotate(Vector2 mousePos, Vector2 delta)//Delta kijkt waar de mouse heen gaat.
     {
         _currentPosition = mousePos;
@@ -37,4 +91,5 @@ public class LevelRotate : MonoBehaviour
     {
         _oldPosition = _currentPosition;
     }
+    */
 }

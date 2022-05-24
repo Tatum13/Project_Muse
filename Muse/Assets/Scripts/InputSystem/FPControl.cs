@@ -57,6 +57,14 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)""
+                },
+                {
+                    ""name"": ""LevelRotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""778fea35-e1ad-4a65-b23d-3675648b2d23"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -158,6 +166,50 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94beb9d8-147b-45c2-a0af-1ca2940a0907"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d76ee798-824a-4b9e-899c-2eab5af297ea"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e707b21-97d0-42e4-8b7a-95b434e8ecff"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9ad75c0-c9d1-41a5-ab33-b448d4ba38cd"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -171,6 +223,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_MousePosition = m_PlayerControls.FindAction("MousePosition", throwIfNotFound: true);
         m_PlayerControls_StartRotating = m_PlayerControls.FindAction("StartRotating", throwIfNotFound: true);
         m_PlayerControls_MouseDelta = m_PlayerControls.FindAction("MouseDelta", throwIfNotFound: true);
+        m_PlayerControls_LevelRotate = m_PlayerControls.FindAction("LevelRotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,6 +278,7 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_MousePosition;
     private readonly InputAction m_PlayerControls_StartRotating;
     private readonly InputAction m_PlayerControls_MouseDelta;
+    private readonly InputAction m_PlayerControls_LevelRotate;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -234,6 +288,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_PlayerControls_MousePosition;
         public InputAction @StartRotating => m_Wrapper.m_PlayerControls_StartRotating;
         public InputAction @MouseDelta => m_Wrapper.m_PlayerControls_MouseDelta;
+        public InputAction @LevelRotate => m_Wrapper.m_PlayerControls_LevelRotate;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +313,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @MouseDelta.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
+                @LevelRotate.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
+                @LevelRotate.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
+                @LevelRotate.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +335,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @MouseDelta.started += instance.OnMouseDelta;
                 @MouseDelta.performed += instance.OnMouseDelta;
                 @MouseDelta.canceled += instance.OnMouseDelta;
+                @LevelRotate.started += instance.OnLevelRotate;
+                @LevelRotate.performed += instance.OnLevelRotate;
+                @LevelRotate.canceled += instance.OnLevelRotate;
             }
         }
     }
@@ -288,5 +349,6 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnStartRotating(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
+        void OnLevelRotate(InputAction.CallbackContext context);
     }
 }
