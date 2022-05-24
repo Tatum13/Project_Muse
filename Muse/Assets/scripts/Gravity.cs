@@ -23,7 +23,6 @@ public class Gravity : MonoBehaviour
     // FixedUpdate() is called at regular time intervals independent of frames
     void FixedUpdate()
 	{
-
 		if(boel.grav == true)
         {
 			rb.useGravity = true;
