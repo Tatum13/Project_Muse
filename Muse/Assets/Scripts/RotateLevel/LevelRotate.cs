@@ -5,19 +5,19 @@ using UnityEngine.InputSystem;
 
 public class LevelRotate : MonoBehaviour
 {
-    [SerializeField] private float _rotateSpeed;
+    //[SerializeField] private float _rotateSpeed;
     //[SerializeField] private Vector3 _rotation;
     public FPControl.PlayerControlsActions _inputControls;
     [SerializeField] private GameObject world;
-    [SerializeField] private Vector3 _oldPosition;
-    [SerializeField] private Vector3 _currentPosition;
+   // [SerializeField] private Vector3 _oldPosition;
+    //[SerializeField] private Vector3 _currentPosition;
 
-    [SerializeField] private float _rotateLvlSpeed;
+    //[SerializeField] private float _rotateLvlSpeed;
     [SerializeField] private bool _isTurning;
-    [SerializeField] private bool _isFullyTurning;
+    //[SerializeField] private bool _isFullyTurning;
     [SerializeField] private float rotate;
-    [SerializeField] private float x;
-    [SerializeField] private float y;
+    //[SerializeField] private float x;
+    //[SerializeField] private float y;
 
     private Timer timer;
     private float _rotated = 0;
@@ -25,7 +25,8 @@ public class LevelRotate : MonoBehaviour
 
     private void Start()
     {
-        world =  FindObjectOfType<GameObject>();
+        //world =  FindObjectOfType<GameObject>();
+        world = GameObject.Find("Level");
         timer = new Timer(2);
         _isTurning = true;
     }
@@ -36,17 +37,19 @@ public class LevelRotate : MonoBehaviour
         {
             if (!timer.Update(Time.deltaTime))
             {
-                rotate = (timer.Percentage * -45) - _rotated;
+                rotate = (timer.Percentage * 90) - _rotated;
                 _rotated += rotate;
-                world.transform.Rotate(rotate,0 , 0);
+                world.transform.Rotate(0, rotate , 0);
             }
             else
             {
+                _isTurning = false;
                 timer.Reset();
-                world.transform.Rotate(-45 - _rotated, 0, 0);
+                world.transform.Rotate(0, 90 - _rotated, 0);
                 _rotated = 0;   
                 //GravitySensor aan
             }
+
             //
             //StartCoroutine(TurnTime());
             //_rotateLvlSpeed = 45;
