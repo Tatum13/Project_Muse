@@ -8,16 +8,12 @@ public class LevelRotate : MonoBehaviour
     //[SerializeField] private float _rotateSpeed;
     //[SerializeField] private Vector3 _rotation;
     public FPControl.PlayerControlsActions _inputControls;
+    public InputParse _input;
     [SerializeField] private GameObject world;
-   // [SerializeField] private Vector3 _oldPosition;
-    //[SerializeField] private Vector3 _currentPosition;
+    [SerializeField] private bool _isTurning = false;
+    [SerializeField] private float rotateDir;
 
-    //[SerializeField] private float _rotateLvlSpeed;
-    [SerializeField] private bool _isTurning;
-    //[SerializeField] private bool _isFullyTurning;
-    [SerializeField] private float rotate;
-    //[SerializeField] private float x;
-    //[SerializeField] private float y;
+    public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
 
     private Timer timer;
     private float _rotated = 0;
@@ -28,71 +24,60 @@ public class LevelRotate : MonoBehaviour
         //world =  FindObjectOfType<GameObject>();
         world = GameObject.Find("Level");
         timer = new Timer(2);
-        _isTurning = true;
+        AllDirections();
     }
-    private void Update()
+    public void AllDirections()
     {
-        
+        directions.Add(Vector2.left, new Vector3(0, 90, 0));
+        directions.Add(Vector2.right, new Vector3(0, -90, 0));
+        directions.Add(Vector2.up, new Vector3(90, 0, 0));
+        directions.Add(Vector2.down, new Vector3(-90, 0, 0));
+    }
+    IEnumerator Keys(Vector2 dir)
+    {
+        if (!_isTurning)//Als _isTurning false is zet het naar true.
+        {
+            _isTurning = true;
+            var angle = transform.eulerAngles;//Kijkt naar wat de angle nu is.
+            var targetAngle = angle + directions[dir];//Kijkt naar de angle waar die naartoe moet.
+            var time = 0f;
+            while (angle != targetAngle)
+            {
+                time = time > 1 ? 1 : time + 0.001f; ;//Als time hoger is dan 1, zo niet doe time + 0.001f.
+                var newPosition = Vector3.Lerp(angle, targetAngle, time);
+                world.transform.Rotate(newPosition);
+                angle = transform.eulerAngles;
+                yield return null;
+            }
+            yield return null; 
+        }
+    }
+    public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
+    {
+        var dir = _inputControls.Rotate.ReadValue<Vector2>();
+        StartCoroutine(Keys(dir));
+        Debug.Log(dir);
+    }
+    public void RotateLeft(InputAction.CallbackContext context)
+    {        
         if (_isTurning == true)
         {
             if (!timer.Update(Time.deltaTime))
-            {
-                rotate = (timer.Percentage * 90) - _rotated;
-                _rotated += rotate;
-                world.transform.Rotate(0, rotate , 0);
+            {       
+                rotateDir = (timer.Percentage * 90) - _rotated;
+                _rotated += rotateDir;
+                world.transform.Rotate(0, rotateDir, 0);
+                Debug.Log("rotate werkt"); 
             }
             else
             {
                 _isTurning = false;
                 timer.Reset();
                 world.transform.Rotate(0, 90 - _rotated, 0);
-                _rotated = 0;   
+                _rotated = 0;
+                Debug.Log("Hij gaat op false");
                 //GravitySensor aan
             }
-
-            //
-            //StartCoroutine(TurnTime());
-            //_rotateLvlSpeed = 45;
-        }
+        }     
     }
-    /*
-    IEnumerator TurnTime()
-    {
-        rotate = _rotateLvlSpeed * Time.deltaTime;
-        yield return new WaitForSeconds(2);
-        _isTurning = false;
-        _rotateLvlSpeed = 0;
-        //rotate = Mathf.Floor(rotate);
-        world.transform.Rotate(0, y, 0);
-        Debug.Log(_rotateLvlSpeed);
-    }
-    public void RotateLvl(Vector3 turnDir)
-    {
-        var rotateDir = new Vector3(turnDir.x, turnDir.y, turnDir.z);
-        transform.position += rotateDir * _rotateLvlSpeed * Time.deltaTime;
-    }
-    */
-    /*
-    public void Rotate(Vector2 mousePos, Vector2 delta)//Delta kijkt waar de mouse heen gaat.
-    {
-        _currentPosition = mousePos;
-        var mouseYDistance = _currentPosition.y - _oldPosition.y;// Krijg je de afstand tussen de 2 punten
-        var mouseXDistance = _currentPosition.x - _oldPosition.x;
-        if (_currentPosition.y > _oldPosition.y && Mathf.Abs(mouseYDistance) > 2)//Werkt altijd met positieve nummers (werkt altijd).
-        {
-            transform.Rotate(delta.y / _rotateSpeed, 0, 0);
-        }
-        else if(_currentPosition.x > _oldPosition.x && Mathf.Abs(mouseXDistance) > 2)
-        {
-            transform.Rotate(0, -delta.x / _rotateSpeed, 0);
-        }
-
-        //transform.Rotate(_rotation * _rotateSpeed * Time.deltaTime);
-    }
-
-    public void SavePosition(InputAction.CallbackContext context)
-    {
-        _oldPosition = _currentPosition;
-    }
-    */
 }

@@ -59,12 +59,12 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)""
                 },
                 {
-                    ""name"": ""LevelRotate"",
+                    ""name"": ""Rotate"",
                     ""type"": ""Value"",
-                    ""id"": ""778fea35-e1ad-4a65-b23d-3675648b2d23"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""id"": ""36dc7e55-2354-40d9-aed2-b5dbad95c15b"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -168,48 +168,59 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""94beb9d8-147b-45c2-a0af-1ca2940a0907"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""ae81a7b3-a520-4842-9be3-fd474637c95a"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LevelRotate"",
-                    ""isComposite"": false,
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""d76ee798-824a-4b9e-899c-2eab5af297ea"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LevelRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8e707b21-97d0-42e4-8b7a-95b434e8ecff"",
+                    ""name"": ""up"",
+                    ""id"": ""3cfd18bd-a09b-4f9f-b3d3-f71e9bdf5bd0"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LevelRotate"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""e9ad75c0-c9d1-41a5-ab33-b448d4ba38cd"",
+                    ""name"": ""down"",
+                    ""id"": ""4e7d89be-65c0-43bc-bb74-33696a4caf07"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LevelRotate"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""04638631-34da-4393-93e6-3c2db328b497"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f8a98aeb-64fe-4c21-bf99-3a82d78e22a1"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -223,7 +234,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_MousePosition = m_PlayerControls.FindAction("MousePosition", throwIfNotFound: true);
         m_PlayerControls_StartRotating = m_PlayerControls.FindAction("StartRotating", throwIfNotFound: true);
         m_PlayerControls_MouseDelta = m_PlayerControls.FindAction("MouseDelta", throwIfNotFound: true);
-        m_PlayerControls_LevelRotate = m_PlayerControls.FindAction("LevelRotate", throwIfNotFound: true);
+        m_PlayerControls_Rotate = m_PlayerControls.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -278,7 +289,7 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_MousePosition;
     private readonly InputAction m_PlayerControls_StartRotating;
     private readonly InputAction m_PlayerControls_MouseDelta;
-    private readonly InputAction m_PlayerControls_LevelRotate;
+    private readonly InputAction m_PlayerControls_Rotate;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -288,7 +299,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_PlayerControls_MousePosition;
         public InputAction @StartRotating => m_Wrapper.m_PlayerControls_StartRotating;
         public InputAction @MouseDelta => m_Wrapper.m_PlayerControls_MouseDelta;
-        public InputAction @LevelRotate => m_Wrapper.m_PlayerControls_LevelRotate;
+        public InputAction @Rotate => m_Wrapper.m_PlayerControls_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,9 +324,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @MouseDelta.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDelta;
-                @LevelRotate.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
-                @LevelRotate.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
-                @LevelRotate.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLevelRotate;
+                @Rotate.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -335,9 +346,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @MouseDelta.started += instance.OnMouseDelta;
                 @MouseDelta.performed += instance.OnMouseDelta;
                 @MouseDelta.canceled += instance.OnMouseDelta;
-                @LevelRotate.started += instance.OnLevelRotate;
-                @LevelRotate.performed += instance.OnLevelRotate;
-                @LevelRotate.canceled += instance.OnLevelRotate;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -349,6 +360,6 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnStartRotating(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
-        void OnLevelRotate(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

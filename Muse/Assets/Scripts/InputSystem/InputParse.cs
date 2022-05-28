@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputParse : MonoBehaviour
 {
-    private FPControl _control;
-    private FPControl.PlayerControlsActions _inputControls;
+    public FPControl _control;
+    public FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
     private LevelRotate _levelRotate;
     public bool _isRotating;
@@ -17,10 +17,12 @@ public class InputParse : MonoBehaviour
         _levelRotate = FindObjectOfType<LevelRotate>();
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
-        //_levelRotate._inputControls = _inputControls;
+        _levelRotate._inputControls = _inputControls;
+
+        _inputControls.Rotate.performed += _levelRotate.Pressed;
+
         _inputControls.StartRotating.performed += _ => _isRotating = true;
         _inputControls.StartRotating.canceled += _ => _isRotating = false; // Wanneer je het niet ingedrukt houd dan mag niet rotaten.
-        //_inputControls.StartRotating.performed += _levelRotate.SavePosition;
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
     private void Update()

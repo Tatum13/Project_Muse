@@ -46,12 +46,12 @@
                     "interactions": "Hold(duration=0.4,pressPoint=0.5)"
                 },
                 {
-                    "name": "LevelRotate",
+                    "name": "Rotate",
                     "type": "Value",
-                    "id": "778fea35-e1ad-4a65-b23d-3675648b2d23",
-                    "expectedControlType": "Vector3",
+                    "id": "36dc7e55-2354-40d9-aed2-b5dbad95c15b",
+                    "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -155,48 +155,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "94beb9d8-147b-45c2-a0af-1ca2940a0907",
-                    "path": "<Keyboard>/leftArrow",
+                    "name": "2D Vector",
+                    "id": "ae81a7b3-a520-4842-9be3-fd474637c95a",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LevelRotate",
-                    "isComposite": false,
+                    "action": "Rotate",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "d76ee798-824a-4b9e-899c-2eab5af297ea",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LevelRotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8e707b21-97d0-42e4-8b7a-95b434e8ecff",
+                    "name": "up",
+                    "id": "3cfd18bd-a09b-4f9f-b3d3-f71e9bdf5bd0",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LevelRotate",
+                    "action": "Rotate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "e9ad75c0-c9d1-41a5-ab33-b448d4ba38cd",
+                    "name": "down",
+                    "id": "4e7d89be-65c0-43bc-bb74-33696a4caf07",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LevelRotate",
+                    "action": "Rotate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "04638631-34da-4393-93e6-3c2db328b497",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f8a98aeb-64fe-4c21-bf99-3a82d78e22a1",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
