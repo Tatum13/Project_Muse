@@ -418,16 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f098e1aacae29dd4d96116ee5a5fb33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 5
+  _input: {fileID: 0}
   world: {fileID: 1404286552}
-  _oldPosition: {x: 0, y: 0, z: 0}
-  _currentPosition: {x: 0, y: 0, z: 0}
-  _rotateLvlSpeed: 44.6
   _isTurning: 0
-  _isFullyTurning: 0
-  rotate: 0
-  x: 0
-  y: 0
+  rotateDir: 0
 --- !u!1 &1841609907
 GameObject:
   m_ObjectHideFlags: 0
