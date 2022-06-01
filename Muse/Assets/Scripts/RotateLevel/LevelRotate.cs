@@ -31,7 +31,8 @@ public class LevelRotate : MonoBehaviour
     IEnumerator YKeys(Vector2 dir)
     {
         _isTurning = true;
-        var angle = world.transform.eulerAngles;//Kijkt naar wat de angle nu is.
+        //var angle = world.transform.eulerAngles;//Kijkt naar wat de angle nu is.
+        var angle = transform.eulerAngles;
         var targetAngle = angle + directions[dir];//Kijkt naar de angle waar die naartoe moet.
 
         float time = 0;
@@ -46,7 +47,7 @@ public class LevelRotate : MonoBehaviour
         }
         _isTurning = false;
     }
-
+    /*
     IEnumerator XKeys(Vector2 dir)
     {
         _isTurning = true;
@@ -65,25 +66,28 @@ public class LevelRotate : MonoBehaviour
         }
         _isTurning = false;
     }
-
+    */
     public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
-        Debug.Log(_inputControls.Rotate.ReadValue<Vector2>());
+        //Debug.Log(_inputControls.Rotate.ReadValue<Vector2>());
         if (!_isTurning)
         {
             var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
-            if(routine != null)
+            if (routine != null)
             {
                 StopCoroutine(routine);
+                /*
+                if(dir.x == 1 || dir.x == -1)
+                {
+                    routine = YKeys(dir);
+                }
+                else if(dir.y == 0 || dir.y == -1)
+                {
+                    routine = XKeys(dir);
+                }
+                */
             }
-            if(dir.x == 1 || dir.x == -1)
-            {
-                routine = YKeys(dir);
-            }
-            else if(dir.y == 0 || dir.y == -1)
-            {
-                routine = XKeys(dir);
-            }
+            routine = YKeys(dir);
             StartCoroutine(routine);
         }
         else
