@@ -8,9 +8,6 @@ public class DeWKnop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("w"))
-        {
-            grav = true;
-        }
+
     }
 }

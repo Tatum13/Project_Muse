@@ -8,6 +8,7 @@ public class InputParse : MonoBehaviour
     public FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
     private LevelRotate _levelRotate;
+    private Gravity _gravity;
     public bool _isRotating;
     public bool _canGrab;
 
@@ -15,9 +16,12 @@ public class InputParse : MonoBehaviour
     {
         _movementPlayer = GetComponent<MovementPlayer>();
         _levelRotate = FindObjectOfType<LevelRotate>();
+        _gravity = FindObjectOfType<Gravity>();
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
         _levelRotate._inputControls = _inputControls;
+
+        _inputControls.Gravity.performed += _gravity.TestGravity;
 
         _inputControls.Rotate.performed += _levelRotate.Pressed;
 

@@ -65,6 +65,14 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Gravity"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a2472e6-e15b-40cf-88f6-15fcfccabd53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -221,6 +229,17 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05eb58d2-9029-423a-8328-8a1b5923dfae"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gravity"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -235,6 +254,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_StartRotating = m_PlayerControls.FindAction("StartRotating", throwIfNotFound: true);
         m_PlayerControls_MouseDelta = m_PlayerControls.FindAction("MouseDelta", throwIfNotFound: true);
         m_PlayerControls_Rotate = m_PlayerControls.FindAction("Rotate", throwIfNotFound: true);
+        m_PlayerControls_Gravity = m_PlayerControls.FindAction("Gravity", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +310,7 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_StartRotating;
     private readonly InputAction m_PlayerControls_MouseDelta;
     private readonly InputAction m_PlayerControls_Rotate;
+    private readonly InputAction m_PlayerControls_Gravity;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -300,6 +321,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @StartRotating => m_Wrapper.m_PlayerControls_StartRotating;
         public InputAction @MouseDelta => m_Wrapper.m_PlayerControls_MouseDelta;
         public InputAction @Rotate => m_Wrapper.m_PlayerControls_Rotate;
+        public InputAction @Gravity => m_Wrapper.m_PlayerControls_Gravity;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,6 +349,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
+                @Gravity.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
+                @Gravity.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
+                @Gravity.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -349,6 +374,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @Gravity.started += instance.OnGravity;
+                @Gravity.performed += instance.OnGravity;
+                @Gravity.canceled += instance.OnGravity;
             }
         }
     }
@@ -361,5 +389,6 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnStartRotating(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnGravity(InputAction.CallbackContext context);
     }
 }
