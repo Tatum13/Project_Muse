@@ -80,7 +80,7 @@ public class LevelRotate : MonoBehaviour
             {
                 routine = YKeys(dir);
             }
-            else if(dir.y == 0 || dir.y == -1)
+            else if(dir.y == 0 || dir.y == -1 || dir.y == +1)
             {
                 routine = XKeys(dir);
             }
