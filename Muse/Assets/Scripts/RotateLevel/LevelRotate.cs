@@ -12,12 +12,17 @@ public class LevelRotate : MonoBehaviour
     [SerializeField] private bool _isTurning = false;
     [SerializeField] private float rotateDir;
 
+    [SerializeField] private Vector3 _worldOriginRotation;
+    [SerializeField] private Vector3 _worldRotation;
+
     public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
 
     private IEnumerator routine;
     private void Start()
     {
         world = GameObject.Find("Level");
+        _worldOriginRotation = worldOrigin.transform.eulerAngles;
+        _worldRotation = world.transform.eulerAngles;
         AllDirections();
     }
     public void AllDirections()
@@ -27,11 +32,12 @@ public class LevelRotate : MonoBehaviour
         directions.Add(Vector2.up, new Vector3(90, 0, 0));
         directions.Add(Vector2.down, new Vector3(-90, 0, 0));
     }
-
-    IEnumerator YKeys(Vector2 dir)
+    
+    IEnumerator XKeys(Vector2 dir)
     {
         _isTurning = true;
-        var angle = world.transform.eulerAngles;//Kijkt naar wat de angle nu is.
+        //var angle = world.transform.rotation.eulerAngles;//Kijkt naar wat de angle nu is.
+        var angle = _worldRotation;
         var targetAngle = angle + directions[dir];//Kijkt naar de angle waar die naartoe moet.
 
         float time = 0;
@@ -39,18 +45,23 @@ public class LevelRotate : MonoBehaviour
 
         while (time< duration)//Wanneer de angle dat die is niet gelijk is aan de angle waar die naartoe moet.
         {
-            var newPosition = Vector3.Lerp(angle, targetAngle, time / duration);
             time += Time.deltaTime;
-            world.transform.eulerAngles = newPosition;
+            var newPosition = Vector3.Lerp(angle, targetAngle, time / duration);
+            newPosition.x %= 360;
+            newPosition.y %= 360;
+            newPosition.z %= 360;
+            //world.transform.rotation = Quaternion.Euler(newPosition);
+            _worldRotation = newPosition;
+            print("gegroet while loop");
             yield return null;
         }
         _isTurning = false;
     }
-
-    IEnumerator XKeys(Vector2 dir)
+    IEnumerator YKeys(Vector2 dir)
     {
         _isTurning = true;
-        var angle = worldOrigin.transform.eulerAngles;//Kijkt naar wat de angle nu is.
+        //var angle = worldOrigin.transform.eulerAngles;//Kijkt naar wat de angle nu is.
+        var angle = _worldOriginRotation;
         var targetAngle = angle + directions[dir];//Kijkt naar de angle waar die naartoe moet.
 
         float time = 0;
@@ -58,17 +69,21 @@ public class LevelRotate : MonoBehaviour
 
         while (time < duration)//Wanneer de angle dat die is niet gelijk is aan de angle waar die naartoe moet.
         {
-            var newPosition = Vector3.Lerp(angle, targetAngle, time / duration);
             time += Time.deltaTime;
-            worldOrigin.transform.eulerAngles = newPosition;
+            var newPosition = Vector3.Lerp(angle, targetAngle, time / duration);
+            //worldOrigin.transform.eulerAngles = newPosition;
+            _worldOriginRotation = newPosition;
+            newPosition.x %= 360;
+            newPosition.y %= 360;
+            newPosition.z %= 360;
+            print("gegroet while loop");
             yield return null;
         }
         _isTurning = false;
     }
-
     public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
-        Debug.Log(_inputControls.Rotate.ReadValue<Vector2>());
+        //Debug.Log(_inputControls.Rotate.ReadValue<Vector2>());
         if (!_isTurning)
         {
             var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
@@ -78,11 +93,11 @@ public class LevelRotate : MonoBehaviour
             }
             if(dir.x == 1 || dir.x == -1)
             {
-                routine = YKeys(dir);
-            }
-            else if(dir.y == 0 || dir.y == -1 || dir.y == +1)
-            {
                 routine = XKeys(dir);
+            }
+            if(dir.y == 0 || dir.y == -1 || dir.y == +1)
+            {
+                routine = YKeys(dir);
             }
             StartCoroutine(routine);
         }
