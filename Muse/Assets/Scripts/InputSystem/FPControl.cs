@@ -81,6 +81,14 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""1661a559-f710-4840-b7a4-f032828d8b6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -380,6 +388,17 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""action"": ""RotateZ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f267b743-2898-4a8b-b67a-d2bb1bf946bc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -396,6 +415,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_Rotate = m_PlayerControls.FindAction("Rotate", throwIfNotFound: true);
         m_PlayerControls_Gravity = m_PlayerControls.FindAction("Gravity", throwIfNotFound: true);
         m_PlayerControls_RotateZ = m_PlayerControls.FindAction("RotateZ", throwIfNotFound: true);
+        m_PlayerControls_PauseGame = m_PlayerControls.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -453,6 +473,7 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_Rotate;
     private readonly InputAction m_PlayerControls_Gravity;
     private readonly InputAction m_PlayerControls_RotateZ;
+    private readonly InputAction m_PlayerControls_PauseGame;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -465,6 +486,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_PlayerControls_Rotate;
         public InputAction @Gravity => m_Wrapper.m_PlayerControls_Gravity;
         public InputAction @RotateZ => m_Wrapper.m_PlayerControls_RotateZ;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +520,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @RotateZ.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
                 @RotateZ.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
                 @RotateZ.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
+                @PauseGame.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -526,6 +551,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @RotateZ.started += instance.OnRotateZ;
                 @RotateZ.performed += instance.OnRotateZ;
                 @RotateZ.canceled += instance.OnRotateZ;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -540,5 +568,6 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnGravity(InputAction.CallbackContext context);
         void OnRotateZ(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }
