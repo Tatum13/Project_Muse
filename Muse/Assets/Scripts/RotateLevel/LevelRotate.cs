@@ -5,36 +5,67 @@ using UnityEngine.InputSystem;
 
 public class LevelRotate : MonoBehaviour
 {
-    [SerializeField] private float _rotateSpeed;
-    //[SerializeField] private Vector3 _rotation;
     public FPControl.PlayerControlsActions _inputControls;
+    public InputParse _input;
     [SerializeField] private GameObject world;
-    [SerializeField] private Vector3 _oldPosition;
-    [SerializeField] private Vector3 _currentPosition;
+    [SerializeField] private bool _isTurning = false;
+
+    public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
+
+    private Vector3 _currentRotation;
+    private Vector3 _rotationZ;
+    private IEnumerator routine;
 
     private void Start()
     {
-        world =  FindObjectOfType<GameObject>();
+        world = GameObject.Find("Level");
+        AllDirections();
+        _currentRotation = new Vector3();
+        _rotationZ = new Vector3();
     }
-    public void Rotate(Vector2 mousePos, Vector2 delta)//Delta kijkt waar de mouse heen gaat.
+    public void AllDirections()
     {
-        _currentPosition = mousePos;
-        var mouseYDistance = _currentPosition.y - _oldPosition.y;// Krijg je de afstand tussen de 2 punten
-        var mouseXDistance = _currentPosition.x - _oldPosition.x;
-        if (_currentPosition.y > _oldPosition.y && Mathf.Abs(mouseYDistance) > 2)//Werkt altijd met positieve nummers (werkt altijd).
+        directions.Add(Vector2.left, new Vector3(0, 90, 0));
+        directions.Add(Vector2.right, new Vector3(0, -90, 0));
+        directions.Add(Vector2.up, new Vector3(90, 0, 0));
+        directions.Add(Vector2.down, new Vector3(-90, 0, 0));
+    } 
+    IEnumerator KeysPressed(Vector2 dir)
+    {
+        _isTurning = true;
+        var targetAngle = _currentRotation + directions[dir];//Kijkt naar de angle waar die naartoe moet.
+        float time = 0;
+        float duration = 0.5f;
+        while (time < duration)//Wanneer de angle dat die is niet gelijk is aan de angle waar die naartoe moet.
         {
-            transform.Rotate(delta.y / _rotateSpeed, 0, 0);
+            time += Time.deltaTime;
+            var newPosition = Vector3.Lerp(_currentRotation, targetAngle, time / duration);
+            newPosition.x %= 360;
+            newPosition.y %= 360;
+            newPosition.z %= 360;
+            world.transform.eulerAngles = newPosition;
+            yield return null;
         }
-        else if(_currentPosition.x > _oldPosition.x && Mathf.Abs(mouseXDistance) > 2)
-        {
-            transform.Rotate(0, -delta.x / _rotateSpeed, 0);
-        }
-
-        //transform.Rotate(_rotation * _rotateSpeed * Time.deltaTime);
+        _currentRotation += directions[dir];
+        _isTurning = false;
     }
-
-    public void SavePosition(InputAction.CallbackContext context)
+    public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
-        _oldPosition = _currentPosition;
+        if (!_isTurning)
+        {
+            var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
+            //var dirZ = _inputControls.RotateZ.ReadValue<Vector3>();
+            if(routine != null)
+            {
+                StopCoroutine(routine);
+            }
+            routine = KeysPressed(dir);
+            StartCoroutine(routine);
+        }
+        else
+        {
+            Debug.Log("i'm busy ");
+        }
     }
 }
+

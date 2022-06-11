@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class InputParse : MonoBehaviour
 {
-    private FPControl _control;
-    private FPControl.PlayerControlsActions _inputControls;
+    public FPControl _control;
+    public FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
     private LevelRotate _levelRotate;
+
     private PauseMenu _pauseMenu;
+
+    private Gravity _gravity;
+
     public bool _isRotating;
-    public bool _canGrab;
 
     private void Start()
     {
@@ -25,6 +28,10 @@ public class InputParse : MonoBehaviour
         _inputControls.StartRotating.canceled += _ => _isRotating = false; // Wanneer je het niet ingedrukt houd dan mag niet rotaten.
         _inputControls.StartRotating.performed += _levelRotate.SavePosition;
         _inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
+
+        _gravity = FindObjectOfType<Gravity>();
+        _inputControls.Gravity.performed += _gravity.TestGravity;
+        _inputControls.Rotate.performed += _levelRotate.Pressed;
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
     private void Update()
