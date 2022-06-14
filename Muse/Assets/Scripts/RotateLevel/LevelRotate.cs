@@ -13,7 +13,7 @@ public class LevelRotate : MonoBehaviour
     public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
 
     private Vector3 _currentRotation;
-    private Vector3 _rotationZ;
+    //private Vector3 _rotationZ;
     private IEnumerator routine;
 
     private void Start()
@@ -21,7 +21,7 @@ public class LevelRotate : MonoBehaviour
         world = GameObject.Find("Level");
         AllDirections();
         _currentRotation = new Vector3();
-        _rotationZ = new Vector3();
+        //_rotationZ = new Vector3();
     }
     public void AllDirections()
     {
