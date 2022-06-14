@@ -19,9 +19,7 @@ public class InputParse : MonoBehaviour
         _control = new FPControl(); // Maakt nieuwe controls aan.
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
         _levelRotate._inputControls = _inputControls;
-
-        //_inputControls.Gravity.performed += _gravity.TestGravity;
-
+        _inputControls.Gravity.performed += _gravity.TestGravity;
         _inputControls.Rotate.performed += _levelRotate.Pressed;
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
