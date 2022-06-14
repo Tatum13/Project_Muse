@@ -73,6 +73,14 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""RotateZ"",
+                    ""type"": ""Button"",
+                    ""id"": ""a31a4dea-8ee3-4332-b1b4-39fe992dcbe2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -350,6 +358,28 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""action"": ""Gravity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bde237c3-b725-4c18-b73e-5053a92609b7"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb4c70f7-df57-4c15-8233-1e1c73950675"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -365,6 +395,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_MouseDelta = m_PlayerControls.FindAction("MouseDelta", throwIfNotFound: true);
         m_PlayerControls_Rotate = m_PlayerControls.FindAction("Rotate", throwIfNotFound: true);
         m_PlayerControls_Gravity = m_PlayerControls.FindAction("Gravity", throwIfNotFound: true);
+        m_PlayerControls_RotateZ = m_PlayerControls.FindAction("RotateZ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -421,6 +452,7 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_MouseDelta;
     private readonly InputAction m_PlayerControls_Rotate;
     private readonly InputAction m_PlayerControls_Gravity;
+    private readonly InputAction m_PlayerControls_RotateZ;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -432,6 +464,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @MouseDelta => m_Wrapper.m_PlayerControls_MouseDelta;
         public InputAction @Rotate => m_Wrapper.m_PlayerControls_Rotate;
         public InputAction @Gravity => m_Wrapper.m_PlayerControls_Gravity;
+        public InputAction @RotateZ => m_Wrapper.m_PlayerControls_RotateZ;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +495,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Gravity.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
                 @Gravity.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
                 @Gravity.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
+                @RotateZ.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
+                @RotateZ.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
+                @RotateZ.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -487,6 +523,9 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Gravity.started += instance.OnGravity;
                 @Gravity.performed += instance.OnGravity;
                 @Gravity.canceled += instance.OnGravity;
+                @RotateZ.started += instance.OnRotateZ;
+                @RotateZ.performed += instance.OnRotateZ;
+                @RotateZ.canceled += instance.OnRotateZ;
             }
         }
     }
@@ -500,5 +539,6 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnGravity(InputAction.CallbackContext context);
+        void OnRotateZ(InputAction.CallbackContext context);
     }
 }
