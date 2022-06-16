@@ -54,14 +54,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Gravity",
-                    "type": "Button",
-                    "id": "7a2472e6-e15b-40cf-88f6-15fcfccabd53",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
                     "name": "RotateZ",
                     "type": "Button",
                     "id": "a31a4dea-8ee3-4332-b1b4-39fe992dcbe2",
@@ -342,17 +334,6 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "05eb58d2-9029-423a-8328-8a1b5923dfae",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gravity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

@@ -26,7 +26,7 @@ public class InputParse : MonoBehaviour
         _inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
 
         _gravity = FindObjectOfType<Gravity>();
-        _inputControls.Gravity.performed += _gravity.TestGravity;
+        //_inputControls.Gravity.performed += _gravity.TestGravity;
         _inputControls.Rotate.performed += _levelRotate.Pressed;
         _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }

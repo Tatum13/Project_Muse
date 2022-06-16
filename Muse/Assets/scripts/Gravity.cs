@@ -5,19 +5,26 @@ using UnityEngine.InputSystem;
 
 public class Gravity : MonoBehaviour
 {
-	private DeWKnop boel;
 	[SerializeField] private Rigidbody rb;
-	[SerializeField] private bool testClick;
+	private LevelRotate turn;
 
-	// Start() is called before the first frame
 	void Start()
 	{
-		boel = GameObject.Find("Directional Light").GetComponent<DeWKnop>();
+		turn = GameObject.Find("Level").GetComponent<LevelRotate>();
 		rb = GetComponent<Rigidbody>();
-	}
-	public void TestGravity(InputAction.CallbackContext context)
-    {
 		rb.useGravity = true;
 	}
-     
+	public void Grav()
+	{
+		if (turn._isTurning == true)
+		{
+			rb.useGravity = false;
+			rb.velocity = Vector3.zero;
+		}
+		else
+		{
+			rb.useGravity = true;
+		}
+	}
+
 }

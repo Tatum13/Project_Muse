@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class LevelRotate : MonoBehaviour
 {
+    private Gravity Grav;
     public FPControl.PlayerControlsActions _inputControls;
     public InputParse _input;
     [SerializeField] private GameObject world;
-    [SerializeField] private bool _isTurning = false;
+    public bool _isTurning = false;
 
     public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
 
@@ -19,8 +20,10 @@ public class LevelRotate : MonoBehaviour
     private void Start()
     {
         world = GameObject.Find("Level");
+        Grav = GameObject.Find("Player").GetComponent<Gravity>();
         AllDirections();
         _currentRotation = new Vector3();
+        Grav.Grav();
         //_rotationZ = new Vector3();
     }
     public void AllDirections()
@@ -33,6 +36,7 @@ public class LevelRotate : MonoBehaviour
     IEnumerator KeysPressed(Vector2 dir)
     {
         _isTurning = true;
+        Grav.Grav();
         var targetAngle = _currentRotation + directions[dir];//Kijkt naar de angle waar die naartoe moet.
         float time = 0;
         float duration = 0.5f;
@@ -48,6 +52,7 @@ public class LevelRotate : MonoBehaviour
         }
         _currentRotation += directions[dir];
         _isTurning = false;
+        Grav.Grav();
     }
     public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
