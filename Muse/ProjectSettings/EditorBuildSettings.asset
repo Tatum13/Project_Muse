@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestLevels/New Scene.unity
-    guid: 90b1a3f231c754048b7a79386261c732
+
+    path: Assets/Scenes/Menu's/MainMenu.unity
+    guid: 225532f09d3e831448784f4af7915a84
   - enabled: 1
-    path: Assets/Scenes/TestLevels/Grav.unity
-    guid: 5916188f31602e5458bea6a62efb72c9
-  - enabled: 1
-    path: Assets/Scenes/TestLevels/Rotate_Level.unity
-    guid: a1707893ba419c74b92ad5ec174820cb
-  m_configObjects: {}
+    path: Assets/Scenes/TestLevels/Sprint2.unity
+    guid: 64dc856a72da3784a984be5604151438
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: dc54325e2f6c20845a657805ab084569, type: 2}
+

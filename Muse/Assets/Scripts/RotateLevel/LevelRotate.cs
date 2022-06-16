@@ -9,21 +9,22 @@ public class LevelRotate : MonoBehaviour
     public FPControl.PlayerControlsActions _inputControls;
     public InputParse _input;
     [SerializeField] private GameObject world;
-    [SerializeField] public bool _isTurning = false;
+    public bool _isTurning = false;
 
     public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
 
     private Vector3 _currentRotation;
-    private Vector3 _rotationZ;
+    //private Vector3 _rotationZ;
     private IEnumerator routine;
 
     private void Start()
     {
-        Grav = GameObject.Find("Player").GetComponent<Gravity>();
         world = GameObject.Find("Level");
+        Grav = GameObject.Find("Player").GetComponent<Gravity>();
         AllDirections();
         _currentRotation = new Vector3();
-        _rotationZ = new Vector3();
+        Grav.Grav();
+        //_rotationZ = new Vector3();
     }
     public void AllDirections()
     {

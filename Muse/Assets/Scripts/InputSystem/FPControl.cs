@@ -67,17 +67,17 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Gravity"",
+                    ""name"": ""RotateZ"",
                     ""type"": ""Button"",
-                    ""id"": ""7a2472e6-e15b-40cf-88f6-15fcfccabd53"",
+                    ""id"": ""a31a4dea-8ee3-4332-b1b4-39fe992dcbe2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
                 },
                 {
-                    ""name"": ""RotateZ"",
+                    ""name"": ""PauseGame"",
                     ""type"": ""Button"",
-                    ""id"": ""a31a4dea-8ee3-4332-b1b4-39fe992dcbe2"",
+                    ""id"": ""1661a559-f710-4840-b7a4-f032828d8b6a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -350,17 +350,6 @@ public class @FPControl : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""05eb58d2-9029-423a-8328-8a1b5923dfae"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gravity"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""bde237c3-b725-4c18-b73e-5053a92609b7"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
@@ -380,6 +369,28 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""action"": ""RotateZ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f267b743-2898-4a8b-b67a-d2bb1bf946bc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3443a9a-81bd-4664-b7de-c33a9db18071"",
+                    ""path"": ""<DualShockGamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -394,8 +405,8 @@ public class @FPControl : IInputActionCollection, IDisposable
         m_PlayerControls_StartRotating = m_PlayerControls.FindAction("StartRotating", throwIfNotFound: true);
         m_PlayerControls_MouseDelta = m_PlayerControls.FindAction("MouseDelta", throwIfNotFound: true);
         m_PlayerControls_Rotate = m_PlayerControls.FindAction("Rotate", throwIfNotFound: true);
-        m_PlayerControls_Gravity = m_PlayerControls.FindAction("Gravity", throwIfNotFound: true);
         m_PlayerControls_RotateZ = m_PlayerControls.FindAction("RotateZ", throwIfNotFound: true);
+        m_PlayerControls_PauseGame = m_PlayerControls.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -451,8 +462,8 @@ public class @FPControl : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_StartRotating;
     private readonly InputAction m_PlayerControls_MouseDelta;
     private readonly InputAction m_PlayerControls_Rotate;
-    private readonly InputAction m_PlayerControls_Gravity;
     private readonly InputAction m_PlayerControls_RotateZ;
+    private readonly InputAction m_PlayerControls_PauseGame;
     public struct PlayerControlsActions
     {
         private @FPControl m_Wrapper;
@@ -463,8 +474,8 @@ public class @FPControl : IInputActionCollection, IDisposable
         public InputAction @StartRotating => m_Wrapper.m_PlayerControls_StartRotating;
         public InputAction @MouseDelta => m_Wrapper.m_PlayerControls_MouseDelta;
         public InputAction @Rotate => m_Wrapper.m_PlayerControls_Rotate;
-        public InputAction @Gravity => m_Wrapper.m_PlayerControls_Gravity;
         public InputAction @RotateZ => m_Wrapper.m_PlayerControls_RotateZ;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -492,12 +503,12 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotate;
-                @Gravity.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
-                @Gravity.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
-                @Gravity.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGravity;
                 @RotateZ.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
                 @RotateZ.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
                 @RotateZ.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRotateZ;
+                @PauseGame.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -520,12 +531,12 @@ public class @FPControl : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
-                @Gravity.started += instance.OnGravity;
-                @Gravity.performed += instance.OnGravity;
-                @Gravity.canceled += instance.OnGravity;
                 @RotateZ.started += instance.OnRotateZ;
                 @RotateZ.performed += instance.OnRotateZ;
                 @RotateZ.canceled += instance.OnRotateZ;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -538,7 +549,7 @@ public class @FPControl : IInputActionCollection, IDisposable
         void OnStartRotating(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnGravity(InputAction.CallbackContext context);
         void OnRotateZ(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }
