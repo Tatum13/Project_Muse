@@ -11,3 +11,8 @@ Player movement moet uitgezet worden wanneer het level draait.
 het level kan niet achter elkaar draaien dus dan doen we een paar seconden 
 er tussen.
 
+de player mag niet meer vast zitten in de mesh collider
+
+prefab maken van de map
+
+de player moet weer recht kunnen draaien wanneer de valt

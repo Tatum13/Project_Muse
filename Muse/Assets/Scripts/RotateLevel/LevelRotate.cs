@@ -19,7 +19,7 @@ public class LevelRotate : MonoBehaviour
 
     private void Start()
     {
-        world = GameObject.Find("Level");
+        world = GameObject.Find("3");
         Grav = GameObject.Find("Player").GetComponent<Gravity>();
         AllDirections();
         _currentRotation = new Vector3();
