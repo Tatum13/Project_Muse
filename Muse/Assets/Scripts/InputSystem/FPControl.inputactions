@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "RotateZ",
+                    "name": "RotateZUP",
                     "type": "Button",
                     "id": "a31a4dea-8ee3-4332-b1b4-39fe992dcbe2",
                     "expectedControlType": "Button",
@@ -65,6 +65,14 @@
                     "name": "PauseGame",
                     "type": "Button",
                     "id": "1661a559-f710-4840-b7a4-f032828d8b6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "RotateZDOWN",
+                    "type": "Button",
+                    "id": "c62078ff-9884-45a6-98b7-0ce2bdd99a13",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -342,18 +350,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateZ",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb4c70f7-df57-4c15-8233-1e1c73950675",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateZ",
+                    "action": "RotateZUP",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -376,6 +373,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a71a5485-260d-4262-a33e-49228764d2de",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateZDOWN",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

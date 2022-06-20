@@ -11,7 +11,7 @@ public class LevelRotate : MonoBehaviour
     [SerializeField] private GameObject world;
     public bool _isTurning = false;
 
-    public Dictionary<Vector2, Vector3> directions = new Dictionary<Vector2, Vector3>();
+    public Dictionary<Vector3, Vector3> directions = new Dictionary<Vector3, Vector3>();
 
     private Vector3 _currentRotation;
     //private Vector3 _rotationZ;
@@ -32,8 +32,10 @@ public class LevelRotate : MonoBehaviour
         directions.Add(Vector2.right, new Vector3(0, -90, 0));
         directions.Add(Vector2.up, new Vector3(90, 0, 0));
         directions.Add(Vector2.down, new Vector3(-90, 0, 0));
+        directions.Add(new Vector3(0,0,1), new Vector3(0, 0, 90));
+        directions.Add(new Vector3(0, 0,-1), new Vector3(0, 0, -90));
     } 
-    IEnumerator KeysPressed(Vector2 dir)
+    IEnumerator KeysPressed(Vector3 dir)
     {
         _isTurning = true;
         Grav.Grav();
@@ -61,6 +63,42 @@ public class LevelRotate : MonoBehaviour
             var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
             //var dirZ = _inputControls.RotateZ.ReadValue<Vector3>();
             if(routine != null)
+            {
+                StopCoroutine(routine);
+            }
+            routine = KeysPressed(dir);
+            StartCoroutine(routine);
+        }
+        else
+        {
+            Debug.Log("i'm busy ");
+        }
+    }
+
+    public void PressedZUP(InputAction.CallbackContext context)
+    {
+        if (!_isTurning)
+        {
+            var dir = new Vector3(0, 0, 1);
+            if (routine != null)
+            {
+                StopCoroutine(routine);
+            }
+            routine = KeysPressed(dir);
+            StartCoroutine(routine);
+        }
+        else
+        {
+            Debug.Log("i'm busy ");
+        }
+    }
+
+    public void PressedZDOWN(InputAction.CallbackContext context)
+    {
+        if (!_isTurning)
+        {
+            var dir = new Vector3(0, 0, -1);
+            if (routine != null)
             {
                 StopCoroutine(routine);
             }

@@ -24,6 +24,8 @@ public class InputParse : MonoBehaviour
         _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
         _levelRotate._inputControls = _inputControls;
         _inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
+        _inputControls.RotateZUP.performed += _levelRotate.PressedZUP;
+        _inputControls.RotateZDOWN.performed += _levelRotate.PressedZDOWN;
 
         _gravity = FindObjectOfType<Gravity>();
         //_inputControls.Gravity.performed += _gravity.TestGravity;
