@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LevelRotate : MonoBehaviour
+public class LevelRotateFinal : MonoBehaviour
 {
     public FPControl.PlayerControlsActions _inputControls;
     public InputParse _input;
@@ -14,6 +14,7 @@ public class LevelRotate : MonoBehaviour
     private MovementPlayer _movement;
     private Vector3 _currentRotation;
     private IEnumerator _routine;
+    private Vector2 _dir;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class LevelRotate : MonoBehaviour
         _grav = GameObject.Find("Player").GetComponent<Gravity>();
         AllDirections();
         _currentRotation = new Vector3();
+        _dir = GetComponent<Vector2>();
         _grav.Grav();
         //_rotationZ = new Vector3();
     }
@@ -30,10 +32,10 @@ public class LevelRotate : MonoBehaviour
         directions.Add(Vector2.right, new Vector3(0, -90, 0));
         directions.Add(Vector2.up, new Vector3(90, 0, 0));
         directions.Add(Vector2.down, new Vector3(-90, 0, 0));
-        directions.Add(new Vector3(0,0,1), new Vector3(0, 0, 90));
-        directions.Add(new Vector3(0, 0,-1), new Vector3(0, 0, -90));
-    } 
-    IEnumerator KeysPressed(Vector3 dir)
+        directions.Add(new Vector3(0, 0, 1), new Vector3(0, 0, 90));
+        directions.Add(new Vector3(0, 0, -1), new Vector3(0, 0, -90));
+    }
+    public void KeysPressed(Vector3 dir)
     {
         _isTurning = true;
         _grav.Grav();
@@ -48,29 +50,23 @@ public class LevelRotate : MonoBehaviour
             newPosition.y %= 360;
             newPosition.z %= 360;
             _world.transform.eulerAngles = newPosition;
-            yield return null;
+            //yield return null;
         }
         _currentRotation += directions[dir];
         _isTurning = false;
         _grav.Grav();
     }
-    IEnumerator WaitTimer()
-    {
-        yield return new WaitForSeconds(2);
-    }
     public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
-        if (this == null) return;
         if (!_isTurning)
         {
-            var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
-            if (dir == null) return;
+            _dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
             //var dirZ = _inputControls.RotateZ.ReadValue<Vector3>();
-            if(_routine != null)
+            if (_routine != null)
             {
-                StopCoroutine(_routine);// niet lief
+                StopCoroutine(_routine);
             }
-            _routine = KeysPressed(dir);
+            KeysPressed(_dir);
             StartCoroutine(_routine);
         }
         else
@@ -81,7 +77,6 @@ public class LevelRotate : MonoBehaviour
 
     public void PressedZUP(InputAction.CallbackContext context)
     {
-        if (this == null) return;
         if (!_isTurning)
         {
             var dir = new Vector3(0, 0, 1);
@@ -89,7 +84,7 @@ public class LevelRotate : MonoBehaviour
             {
                 StopCoroutine(_routine);
             }
-            _routine = KeysPressed(dir);
+            KeysPressed(dir);
             StartCoroutine(_routine);
         }
         else
@@ -100,16 +95,14 @@ public class LevelRotate : MonoBehaviour
 
     public void PressedZDOWN(InputAction.CallbackContext context)
     {
-        if (this == null) return;
         if (!_isTurning)
         {
             var dir = new Vector3(0, 0, -1);
-            if (dir == null) return;
             if (_routine != null)
             {
                 StopCoroutine(_routine);
             }
-            _routine = KeysPressed(dir);
+            KeysPressed(dir);
             StartCoroutine(_routine);
         }
         else
@@ -118,4 +111,3 @@ public class LevelRotate : MonoBehaviour
         }
     }
 }
-

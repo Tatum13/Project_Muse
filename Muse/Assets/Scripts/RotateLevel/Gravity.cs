@@ -5,20 +5,20 @@ using UnityEngine.InputSystem;
 
 public class Gravity : MonoBehaviour
 {
-	private LevelRotate _turn;
+	//private LevelRotate _turn;
+	private LevelRotate _turnFinal;
 	[SerializeField] private Rigidbody rb;
 
 	// Start() is called before the first frame
 	void Awake()
 	{
-		_turn = GameObject.Find("RotateSpot").GetComponent<LevelRotate>();
+		_turnFinal = GameObject.Find("RotateSpot").GetComponent<LevelRotate>();
 		rb = GetComponent<Rigidbody>();
 		rb.useGravity = true;
 	}
 	public void Grav()
     {
-		Debug.Log(_turn);
-		if (_turn._isTurning == true)
+		if (_turnFinal._isTurning == true)
 		{
 			rb.useGravity = false;
 			rb.velocity = Vector3.zero;

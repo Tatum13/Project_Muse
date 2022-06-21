@@ -6,18 +6,19 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private bool isPaused = false;
-    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private bool _isPaused = false;
+    [SerializeField] private GameObject _pauseMenuUI;
 
     private void Start()
     {
-        pauseMenuUI.SetActive(false);
+        _pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void PauseGame(InputAction.CallbackContext context)
     {
-        if (pauseMenuUI == null) return; //Wanneer die de canvas niet kan vinden GA dan terug.
-        if (isPaused)
+        if (_pauseMenuUI == null) return; //Wanneer die de canvas niet kan vinden GA dan terug.
+        if (_isPaused)
         {
             Resume();
         }
@@ -28,15 +29,15 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        isPaused = false;
+        _isPaused = false;
     }
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        _isPaused = true;
     }
     public void BackToMainMenu()
     {

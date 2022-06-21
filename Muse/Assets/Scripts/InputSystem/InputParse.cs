@@ -7,7 +7,7 @@ public class InputParse : MonoBehaviour
     public FPControl _control;
     public FPControl.PlayerControlsActions _inputControls;
     private MovementPlayer _movementPlayer;
-    private LevelRotate _levelRotate;
+    [SerializeField] private LevelRotate _levelRotate;
 
     private PauseMenu _pauseMenu;
 
