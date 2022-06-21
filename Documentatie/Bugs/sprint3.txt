@@ -1,0 +1,18 @@
+met het rotaten moeten we bijhouden wat de voorkant is,
+zodat het niet raar draait.
+
+Het moet op de Z kunnen draaien
+
+Wanneer je van de game naar main menu gaat en terug op play klikt
+veranderd de lighting en de input kan die niet vinden.
+Dus de scene switch is niet heel soepel.
+
+Player movement moet uitgezet worden wanneer het level draait.
+het level kan niet achter elkaar draaien dus dan doen we een paar seconden 
+er tussen.
+
+de player mag niet meer vast zitten in de mesh collider
+
+prefab maken van de map
+
+de player moet weer recht kunnen draaien wanneer de valt
