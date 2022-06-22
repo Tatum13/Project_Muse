@@ -21,9 +21,7 @@ public class MovementPlayer : MonoBehaviour
 
             var moveDirection = new Vector3(position.x, 0, position.y); //de z word een y wegens dat je niet springt.
             transform.position += moveDirection * speed * Time.deltaTime;
-            //if (moveDirection == null) return;
             _player.transform.rotation = Quaternion.LookRotation(moveDirection);
-
     }
 
 }
