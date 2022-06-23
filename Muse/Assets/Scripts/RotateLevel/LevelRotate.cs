@@ -37,25 +37,7 @@ public class LevelRotate : MonoBehaviour
     {
         _isTurning = true;
         _grav.Grav();
-        Vector2 targetAngle = Vector2.zero;
-
-        bool _stop = false;
-        try
-        {
-            targetAngle = _currentRotation + directions[dir];//Kijkt naar de angle waar die naartoe moet.
-        }
-        catch(System.Exception e)
-        {
-            Debug.LogWarning(e);
-            _stop = true;
-        }
-
-        //Kan ene bepaalde kant niet op wegens dat een direction niet bestaat
-        if (_stop)
-        {
-            yield return null;
-        }
-
+        var targetAngle = _currentRotation + directions[dir];//Kijkt naar de angle waar die naartoe moet.
         float time = 0;
         float duration = 0.5f;
         while (time < duration)//Wanneer de angle dat die is niet gelijk is aan de angle waar die naartoe moet.
@@ -72,17 +54,12 @@ public class LevelRotate : MonoBehaviour
         _isTurning = false;
         _grav.Grav();
     }
-    IEnumerator WaitTimer()
-    {
-        yield return new WaitForSeconds(2);
-    }
     public void Pressed(InputAction.CallbackContext context)//Kijkt naar welke knop je indrukt.
     {
         if (this == null) return;
         if (!_isTurning)
         {
             var dir = _inputControls.Rotate.ReadValue<Vector2>(); //kijkt naar welke knoppen je indrukt.
-            Debug.Log(dir);
             if (dir == null) return;
             //var dirZ = _inputControls.RotateZ.ReadValue<Vector3>();
             if(_routine != null)
