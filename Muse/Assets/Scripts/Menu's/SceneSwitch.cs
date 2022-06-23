@@ -17,6 +17,6 @@ public class SceneSwitch : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collisionInfo) 
     {
-        SceneManager.LoadScene(sceneBuildIndex: level);
+        SceneManager.LoadScene(2);
     }
 }
