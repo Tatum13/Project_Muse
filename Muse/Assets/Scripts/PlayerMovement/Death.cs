@@ -10,6 +10,5 @@ public class Death : MonoBehaviour
         Points.Levens = Points.Levens +1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         int recievedPoints = Points.Levens;
-        Debug.Log(recievedPoints);
     }
 }
