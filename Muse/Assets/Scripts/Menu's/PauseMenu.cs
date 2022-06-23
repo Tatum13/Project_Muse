@@ -42,6 +42,7 @@ public class PauseMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(0);
+        Points.Levens = 0;
     }
     public void QuitGame()
     {
