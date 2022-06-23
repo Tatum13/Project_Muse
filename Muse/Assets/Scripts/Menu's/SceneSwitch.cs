@@ -12,11 +12,7 @@ public class SceneSwitch : MonoBehaviour
     {
         if (level1 == true)
         {
-            level = 1;
-        }
-        else if (level2 == true)
-        {
-            level = 2;
+            level = 0;
         }
     }
     private void OnCollisionEnter(Collision collisionInfo) 
