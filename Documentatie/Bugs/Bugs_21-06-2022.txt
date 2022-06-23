@@ -1,0 +1,22 @@
+Wanneer je met de controller met de right stick schuin 
+omhoog gaat. Dan kan die niet vinden welke kant je op wilt gaan.
+Dus geeft unity een error aan wanneer die niet weet welke kant je
+op wilt gaan.
+
+De player komt na zoveel keer draaien boven het object.
+Dit kan misschien gefixt worden door een colider boven het object
+te plaatsen, zodat alles reset.
+
+Af en toe zit de player vast in de mesh collider van het object.
+
+Je kan nu het level achter elkaar draaien, maar dat zou niet moeten kunnen.
+De oplossing hiervoor kan zijn dat het object een paar seconden stil staat
+of dat je voor een paar seconden niet kan ronddraaien met de controller.
+
+Wanneer je in de game zit en dan naar main manu gaat en dan vervolgens weer
+terug gaat naar het spel dan is de lighting anders en geeft die errors aan
+wanneer en input gegeven word. Het lijkt erop alsof het bepaalde dingen niet
+kan vinden wanneer het level gereload word.
+
+Misschien moet de pivot van het object gereset worden, zodat het misschien
+cleaner voelt met rotaten.
