@@ -36,7 +36,7 @@ In onze game is het de bedoeling om van het scherm te verdwijnen. Dat is het doe
 | Asset planning (pdf)                  | [AssetPlanning]
 |<img width=500/>|<img width=300/>|
 
-   [Backlog]: <https://trello.com/b/hik72z4q/mythe-2019-voorbeeld-trello>
+   [Backlog]: <https://trello.com/b/nqHcl2AE/muse>
    [Logboek]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/logboek.pdf>
    [GameDesignDoc]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/GameDesignDoc.pdf>
    [RetrospectiveVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/RetrospectiveVerslagen.pdf>
