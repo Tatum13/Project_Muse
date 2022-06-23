@@ -13,7 +13,7 @@ In onze game is het de bedoeling om van het scherm te verdwijnen. Dat is het doe
 | ------ |  ------ |
 | Link naar online product backlog (Trello) | [Backlog]
 | Logboek (pdf)                             | [Logboek]
-| Game concept doc (pdf)                    | [GameDesignDoc]
+| Game concept doc (pdf)                    | [Folder op teams]
 |<img width=500/>|<img width=300/>|
    
 #### Producten Werkproces 2
@@ -37,11 +37,11 @@ In onze game is het de bedoeling om van het scherm te verdwijnen. Dat is het doe
 |<img width=500/>|<img width=300/>|
 
    [Backlog]: <https://trello.com/b/nqHcl2AE/muse>
-   [Logboek]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/logboek.pdf>
+   [Logboek]: <https://github.com/Tatum13/Project_Muse/blob/master/Documentatie/Logboek/logboek.pdf>
    [GameDesignDoc]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/GameDesignDoc.pdf>
-   [RetrospectiveVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/RetrospectiveVerslagen.pdf>
+   [RetrospectiveVerslagen]: <https://github.com/Tatum13/Project_Muse/tree/master/Documentatie/Retrospectives>
    [ReviewVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/ReviewVerslagen.pdf>
    [Prototype]: <https://www.mijnmytheprototype.nl>
-   [Folder op teams]: <https://www.linknaarmijnfolderopteams.nl>
-   [AssetPlanning]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/AssetPlanning.pdf>
+   [Folder op teams]: <https://mediacollegeamsterdam.sharepoint.com/:f:/r/teams/C20-F3M8BO-Muse-Team08/Gedeelde%20documenten/Team%2008/Git%20Extension?csf=1&web=1&e=PX5996>
+   [AssetPlanning]: <https://github.com/Tatum13/Project_Muse/blob/master/Documentatie/Assets%20Structuur/Assets%20Structuur.pdf>
    
