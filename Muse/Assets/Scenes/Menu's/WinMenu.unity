@@ -402,7 +402,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 984142693}
         m_TargetAssemblyTypeName: WinScreen, Assembly-CSharp
-        m_MethodName: Switch
+        m_MethodName: SwitchScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
