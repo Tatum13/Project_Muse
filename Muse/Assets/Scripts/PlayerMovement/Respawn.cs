@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Death : MonoBehaviour
+public class Respawn : MonoBehaviour
 {
     private void OnTriggerExit(Collider Trigger)
     {
