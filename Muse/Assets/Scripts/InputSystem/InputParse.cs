@@ -4,36 +4,32 @@ using UnityEngine;
 
 public class InputParse : MonoBehaviour
 {
-    public FPControl _control;
-    public FPControl.PlayerControlsActions _inputControls;
-    private MovementPlayer _movementPlayer;
-    [SerializeField] private LevelRotate _levelRotate;
-
-    private PauseMenu _pauseMenu;
-
-    private Gravity _gravity;
-    
+    public FPControl control;
+    public FPControl.PlayerControlsActions inputControls;
     public bool _isRotating;
+    [SerializeField] private LevelRotater levelRotate;
+    private PlayerMovement _movementPlayer;
+    private PauseMenu _pauseMenu;
+    private PlayerGravity _gravity;
 
     private void Start()
     {
-        _movementPlayer = GetComponent<MovementPlayer>();
-        _levelRotate = FindObjectOfType<LevelRotate>();
+        _movementPlayer = GetComponent<PlayerMovement>();
+        levelRotate = FindObjectOfType<LevelRotater>();
         _pauseMenu = FindObjectOfType<PauseMenu>();
-        _control = new FPControl(); // Maakt nieuwe controls aan.
-        _inputControls = _control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
-        _levelRotate._inputControls = _inputControls;
-        _inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
-        _inputControls.RotateZUP.performed += _levelRotate.PressedZUP;
-        _inputControls.RotateZDOWN.performed += _levelRotate.PressedZDOWN;
+        control = new FPControl(); // Maakt nieuwe controls aan.
+        inputControls = control.PlayerControls; // Maakt een instantie van de knoppen die zijn aangemaakt?
+        levelRotate.inputControls = inputControls;
+        inputControls.PauseGame.performed += _pauseMenu.PauseGame; //Wanneer je esc drukt moet de game op pauze.
+        inputControls.RotateZUP.performed += levelRotate.RotateLevelZUp;
+        inputControls.RotateZDOWN.performed += levelRotate.RotateLevelZDown;
 
-        _gravity = FindObjectOfType<Gravity>();
-        //_inputControls.Gravity.performed += _gravity.TestGravity;
-        _inputControls.Rotate.performed += _levelRotate.Pressed;
-        _inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
+        _gravity = FindObjectOfType<PlayerGravity>();
+        inputControls.Rotate.performed += levelRotate.InputDirection;
+        inputControls.Enable();//Functie die zegt dat die de inputcontrols mag gebruiken.
     }
     private void Update()
     {
-        _movementPlayer.Walking(_inputControls.Walking.ReadValue<Vector2>());//Kijkt in inputcontrols of die walking heeft daarna zoekt die naar de value van vector 2.
+        _movementPlayer.Walking(inputControls.Walking.ReadValue<Vector2>());//Kijkt in inputcontrols of die walking heeft daarna zoekt die naar de value van vector 2.
     }
 }

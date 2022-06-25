@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WinScreen : MonoBehaviour
 {
-    public void Switch()
+    public void SwitchScene()
     {
         Points.Levens = 0;
         SceneManager.LoadScene(0);
