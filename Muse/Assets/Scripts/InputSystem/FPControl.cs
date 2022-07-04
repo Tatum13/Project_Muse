@@ -534,6 +534,17 @@ public class @FPControl : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8f84344f-b867-4e06-ae95-9824bdbd4ad8"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZUP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f267b743-2898-4a8b-b67a-d2bb1bf946bc"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -558,6 +569,17 @@ public class @FPControl : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a71a5485-260d-4262-a33e-49228764d2de"",
                     ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateZDOWN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f80fb7ef-f44e-4d00-a721-274ab8e0319d"",
+                    ""path"": ""<XInputController>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
